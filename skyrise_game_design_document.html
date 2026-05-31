@@ -1,0 +1,674 @@
+
+<h2 class="sr-only">SKYRISE — Tower Blocks Stacking Game Design Planning Document</h2>
+<style>
+.sec{margin-bottom:2.5rem}
+.shd{font-size:18px;font-weight:500;color:var(--color-text-primary);margin:0 0 3px}
+.sub{font-size:12px;color:var(--color-text-tertiary);margin:0 0 1.25rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:var(--border-radius-md);font-size:12px;font-weight:500}
+.ok{background:var(--color-background-success);color:var(--color-text-success)}
+.ii{background:var(--color-background-info);color:var(--color-text-info)}
+.ww{background:var(--color-background-warning);color:var(--color-text-warning)}
+.dd{background:var(--color-background-danger);color:var(--color-text-danger)}
+.gg{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.d{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:2rem 0}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.srow:last-child{border-bottom:none}
+.ph{display:grid;grid-template-columns:88px 1fr;gap:14px;margin-bottom:12px;align-items:start}
+.ph-lbl{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px;text-align:center;font-size:11px;line-height:1.5;font-weight:500}
+.ml{display:grid;grid-template-columns:64px 1fr;gap:12px;margin-bottom:10px;align-items:start}
+.ml-f{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:6px 8px;text-align:center;font-size:11px;font-weight:500;line-height:1.4}
+.bld{text-align:center;padding:8px 4px}
+.bld .bn{font-size:11px;font-weight:500;margin-top:8px;color:var(--color-text-primary);display:block}
+.bld .bt{font-size:10px;color:var(--color-text-tertiary)}
+.step-flow{display:flex;gap:0;overflow-x:auto;margin-bottom:1.25rem}
+.step-box{flex:1;min-width:80px;padding:10px 6px;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);text-align:center;position:relative}
+.step-box:first-child{border-radius:var(--border-radius-md) 0 0 var(--border-radius-md)}
+.step-box:last-child{border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.step-box:not(:first-child){border-left:none}
+.step-num{font-size:10px;color:var(--color-text-tertiary);margin-bottom:3px}
+.step-label{font-size:12px;font-weight:500;color:var(--color-text-primary);display:block;margin-bottom:2px}
+.step-desc{font-size:10px;color:var(--color-text-secondary)}
+.fx-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;padding:10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)}
+.fx-row i{font-size:18px;color:var(--color-text-secondary);flex-shrink:0;margin-top:1px}
+.combo-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;border:0.5px solid var(--color-border-secondary)}
+</style>
+
+<div style="text-align:center;padding:2rem 0 1.75rem;">
+  <div style="display:inline-flex;align-items:center;gap:12px;margin-bottom:8px;">
+    <i class="ti ti-building-skyscraper" style="font-size:34px;color:var(--color-text-primary)" aria-hidden="true"></i>
+    <span style="font-size:30px;font-weight:500;letter-spacing:-0.5px;color:var(--color-text-primary);">SKYRISE</span>
+  </div>
+  <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 1.25rem;">"Build Your Legacy, One Floor at a Time" — Tower Block Stacking Game · GDD v1.0</p>
+  <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
+    <span class="badge gg"><i class="ti ti-world" aria-hidden="true"></i>Web Browser</span>
+    <span class="badge gg"><i class="ti ti-device-mobile" aria-hidden="true"></i>Mobile Ready</span>
+    <span class="badge gg">Arcade / Casual</span>
+    <span class="badge ii"><i class="ti ti-clock" aria-hidden="true"></i>Est. 10 Weeks</span>
+  </div>
+</div>
+
+<hr class="d">
+
+<div class="sec">
+  <div class="shd">01 — Game Concept</div>
+  <div class="sub">Core premise, player fantasy, and unique selling points</div>
+  <div class="g3">
+    <div class="card">
+      <i class="ti ti-crown" style="font-size:20px;color:var(--color-text-secondary);margin-bottom:8px;display:block" aria-hidden="true"></i>
+      <p style="font-size:13px;font-weight:500;margin:0 0 6px;">The Fantasy</p>
+      <p style="font-size:13px;color:var(--color-text-secondary);margin:0;line-height:1.7;">You're a legendary urban developer racing to build the world's tallest skyscraper. Each precisely placed floor earns prestige. One miscalculated drop and your tower narrows — then crumbles. The city is watching.</p>
+    </div>
+    <div class="card">
+      <i class="ti ti-repeat" style="font-size:20px;color:var(--color-text-secondary);margin-bottom:8px;display:block" aria-hidden="true"></i>
+      <p style="font-size:13px;font-weight:500;margin:0 0 6px;">Core Loop</p>
+      <p style="font-size:13px;color:var(--color-text-secondary);margin:0;line-height:1.7;">Watch the block swing → feel the timing → tap to drop → react to feedback. Perfect alignment triggers euphoric fireworks. A miss punishes tower width. Endlessly replayable in 30 seconds or 30 minutes.</p>
+    </div>
+    <div class="card">
+      <i class="ti ti-sparkles" style="font-size:20px;color:var(--color-text-secondary);margin-bottom:8px;display:block" aria-hidden="true"></i>
+      <p style="font-size:13px;font-weight:500;margin:0 0 6px;">Unique Edge</p>
+      <p style="font-size:13px;color:var(--color-text-secondary);margin:0;line-height:1.7;">Hyper-realistic architectural façades drawn per pixel on Canvas. The city skyline shifts from golden dawn to neon midnight as you rise. 5 building types with real architectural detail. Combo multipliers that shake the screen.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="d">
+
+<div class="sec">
+  <div class="shd">02 — Theme & Visual Direction</div>
+  <div class="sub">Art style, atmosphere, environment, and day-night cycle</div>
+  <div class="g2">
+    <div class="card">
+      <p style="font-size:13px;font-weight:500;margin:0 0 10px;">Sky — Height Progression</p>
+      <div style="display:flex;border-radius:var(--border-radius-md);overflow:hidden;margin-bottom:8px;height:22px;">
+        <div style="flex:1;background:#FFDB99;"></div>
+        <div style="flex:1;background:#FFB347;"></div>
+        <div style="flex:2;background:#87CEEB;"></div>
+        <div style="flex:1;background:#E8622A;"></div>
+        <div style="flex:1;background:#5C35A8;"></div>
+        <div style="flex:2;background:#0A0A20;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-tertiary);">
+        <span>Dawn</span><span>Morning</span><span>Midday</span><span>Golden Hour</span><span>Dusk</span><span>Night</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--color-text-tertiary);margin-top:2px;">
+        <span>Fl.1</span><span>Fl.5</span><span>Fl.10</span><span>Fl.20</span><span>Fl.30</span><span>Fl.50+</span>
+      </div>
+      <p style="font-size:11px;color:var(--color-text-tertiary);margin:10px 0 0;">Background has 3 parallax layers — near buildings, mid skyline, distant sky — each scrolling at different speeds as tower grows upward.</p>
+    </div>
+    <div class="card">
+      <p style="font-size:13px;font-weight:500;margin:0 0 10px;">Visual Architecture</p>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Renderer</span><span>HTML5 Canvas 2D (60fps)</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Buildings</span><span>Pixel-detailed façades</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Background</span><span>3-layer parallax skyline</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Lighting</span><span>Window lights turn on at night</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Screen Res</span><span>HiDPI / Retina aware</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Camera</span><span>Smooth pan upward as tower rises</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="d">
+
+<div class="sec">
+  <div class="shd">03 — Core Mechanics</div>
+  <div class="sub">Block movement, placement detection, and trimming rules</div>
+
+  <div class="step-flow">
+    <div class="step-box">
+      <div class="step-num">01</div>
+      <span class="step-label">Foundation</span>
+      <div class="step-desc">First block placed at base, full width</div>
+    </div>
+    <div class="step-box">
+      <div class="step-num">02</div>
+      <span class="step-label">Block Enters</span>
+      <div class="step-desc">New block slides in from left or right</div>
+    </div>
+    <div class="step-box">
+      <div class="step-num">03</div>
+      <span class="step-label">Oscillates</span>
+      <div class="step-desc">Block swings back and forth (sine wave)</div>
+    </div>
+    <div class="step-box">
+      <div class="step-num">04</div>
+      <span class="step-label">Player Taps</span>
+      <div class="step-desc">Click or tap at the right moment</div>
+    </div>
+    <div class="step-box">
+      <div class="step-num">05</div>
+      <span class="step-label">Detection</span>
+      <div class="step-desc">Overlap calculated in pixels</div>
+    </div>
+    <div class="step-box">
+      <div class="step-num">06</div>
+      <span class="step-label">Outcome</span>
+      <div class="step-desc">Perfect / trim / or game over</div>
+    </div>
+  </div>
+
+  <div class="card" style="padding:1.25rem 1.25rem 1rem;">
+    <p style="font-size:13px;font-weight:500;margin:0 0 1rem;">Placement Accuracy System</p>
+    <svg width="100%" viewBox="0 0 640 200" role="img">
+      <title>Block placement accuracy zones diagram</title>
+      <desc>Diagram showing four placement accuracy zones: Perfect, Great, Good, and Miss, relative to the base block</desc>
+      <defs>
+        <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+      </defs>
+      <g class="c-gray">
+        <rect x="100" y="148" width="300" height="40" rx="6" stroke-width="0.5"/>
+        <text class="th" x="250" y="173" text-anchor="middle" dominant-baseline="central">Base block (previous floor)</text>
+      </g>
+      <g class="c-red" opacity="0.25"><rect x="50" y="98" width="400" height="40" rx="6" stroke-width="0.5"/></g>
+      <g class="c-amber" opacity="0.35"><rect x="76" y="98" width="348" height="40" rx="6" stroke-width="0.5"/></g>
+      <g class="c-teal" opacity="0.4"><rect x="105" y="98" width="290" height="40" rx="6" stroke-width="0.5"/></g>
+      <g class="c-green" opacity="0.6"><rect x="144" y="98" width="212" height="40" rx="6" stroke-width="0.5"/></g>
+      <g class="c-blue">
+        <rect x="168" y="98" width="164" height="40" rx="6" stroke-width="1"/>
+        <text class="th" x="250" y="123" text-anchor="middle" dominant-baseline="central">Moving block</text>
+      </g>
+      <line x1="300" y1="130" x2="380" y2="130" stroke="#888" stroke-width="0.5" marker-end="url(#ar2)"/>
+      <line x1="200" y1="130" x2="120" y2="130" stroke="#888" stroke-width="0.5" marker-end="url(#ar2)"/>
+      <g class="c-green">
+        <rect x="416" y="91" width="80" height="22" rx="4" stroke-width="0.5"/>
+        <text class="th" x="456" y="102" text-anchor="middle" dominant-baseline="central">PERFECT!</text>
+      </g>
+      <text class="ts" x="504" y="102" dominant-baseline="central">±12px  →  +50 pts</text>
+      <g class="c-teal">
+        <rect x="416" y="117" width="80" height="22" rx="4" stroke-width="0.5"/>
+        <text class="th" x="456" y="128" text-anchor="middle" dominant-baseline="central">GREAT</text>
+      </g>
+      <text class="ts" x="504" y="128" dominant-baseline="central">±24px  →  +25 pts</text>
+      <g class="c-amber">
+        <rect x="416" y="143" width="80" height="22" rx="4" stroke-width="0.5"/>
+        <text class="th" x="456" y="154" text-anchor="middle" dominant-baseline="central">GOOD</text>
+      </g>
+      <text class="ts" x="504" y="154" dominant-baseline="central">±40px  →  +10 pts</text>
+      <g class="c-red">
+        <rect x="416" y="169" width="80" height="22" rx="4" stroke-width="0.5"/>
+        <text class="th" x="456" y="180" text-anchor="middle" dominant-baseline="central">MISS</text>
+      </g>
+      <text class="ts" x="504" y="180" dominant-baseline="central">Falls off  →  trimmed!</text>
+      <text class="ts" x="250" y="16" text-anchor="middle">← block oscillates left and right →</text>
+      <line x1="168" y1="26" x2="110" y2="26" stroke="var(--s)" stroke-width="0.5" marker-end="url(#ar2)"/>
+      <line x1="332" y1="26" x2="390" y2="26" stroke="var(--s)" stroke-width="0.5" marker-end="url(#ar2)"/>
+      <line x1="250" y1="96" x2="250" y2="50" stroke="var(--s)" stroke-width="0.5" stroke-dasharray="3,3"/>
+      <text class="ts" x="250" y="44" text-anchor="middle">center alignment</text>
+    </svg>
+  </div>
+  <p style="font-size:12px;color:var(--color-text-tertiary);margin:8px 0 0 4px;">If the remaining block width drops below 15% of the original foundation width → Game Over. Excess trimmed pieces fall with simulated physics and shatter on landing.</p>
+</div>
+
+<hr class="d">
+
+<div class="sec">
+  <div class="shd">04 — Building Types</div>
+  <div class="sub">Five distinct architectural personalities — each block is a unique building</div>
+
+  <div class="g5">
+    <div class="bld">
+      <svg viewBox="0 0 72 120" width="72" height="120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="72" height="120" fill="#C4AF8A"/>
+        <rect x="0" y="0" width="72" height="4" fill="#B09A74"/>
+        <rect x="0" y="22" width="72" height="2" fill="#A88E68"/>
+        <rect x="0" y="46" width="72" height="2" fill="#A88E68"/>
+        <rect x="0" y="70" width="72" height="2" fill="#A88E68"/>
+        <rect x="0" y="94" width="72" height="2" fill="#A88E68"/>
+        <rect x="6" y="7" width="13" height="13" rx="1" fill="#FFE8A3" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="29" y="7" width="13" height="13" rx="1" fill="#7A9DB5" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="52" y="7" width="13" height="13" rx="1" fill="#FFE8A3" stroke="#8B7355" stroke-width="0.5"/>
+        <line x1="6" y1="13.5" x2="19" y2="13.5" stroke="#8B7355" stroke-width="0.3"/>
+        <line x1="29" y1="13.5" x2="42" y2="13.5" stroke="#8B7355" stroke-width="0.3"/>
+        <line x1="52" y1="13.5" x2="65" y2="13.5" stroke="#8B7355" stroke-width="0.3"/>
+        <rect x="6" y="26" width="13" height="13" rx="1" fill="#7A9DB5" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="29" y="26" width="13" height="13" rx="1" fill="#FFE8A3" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="52" y="26" width="13" height="13" rx="1" fill="#FFE8A3" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="6" y="50" width="13" height="13" rx="1" fill="#FFE8A3" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="29" y="50" width="13" height="13" rx="1" fill="#7A9DB5" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="52" y="50" width="13" height="13" rx="1" fill="#FFE8A3" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="6" y="74" width="13" height="13" rx="1" fill="#7A9DB5" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="29" y="74" width="13" height="13" rx="1" fill="#FFE8A3" stroke="#8B7355" stroke-width="0.5"/>
+        <rect x="52" y="74" width="13" height="13" rx="1" fill="#7A9DB5" stroke="#8B7355" stroke-width="0.5"/>
+        <line x1="6" y1="38" x2="19" y2="38" stroke="#B09A74" stroke-width="0.5"/>
+        <line x1="29" y1="38" x2="42" y2="38" stroke="#B09A74" stroke-width="0.5"/>
+        <line x1="52" y1="38" x2="65" y2="38" stroke="#B09A74" stroke-width="0.5"/>
+        <rect x="26" y="96" width="20" height="24" rx="1" fill="#7A5F42"/>
+        <rect x="27" y="97" width="9" height="23" fill="#5B4230"/>
+        <rect x="37" y="97" width="9" height="23" fill="#4A3420"/>
+        <circle cx="35" cy="108" r="1.5" fill="#C9A040"/>
+      </svg>
+      <span class="bn">Residential</span>
+      <span class="bt">Apartments</span>
+    </div>
+
+    <div class="bld">
+      <svg viewBox="0 0 72 120" width="72" height="120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="72" height="120" fill="#1E3A5F"/>
+        <rect x="0" y="0" width="72" height="6" fill="#162D4A"/>
+        <rect x="5" y="8" width="10" height="104" rx="0" fill="#4A8FBF" opacity="0.6"/>
+        <rect x="19" y="8" width="10" height="104" rx="0" fill="#3D7BA8" opacity="0.5"/>
+        <rect x="33" y="8" width="10" height="104" rx="0" fill="#4A8FBF" opacity="0.65"/>
+        <rect x="47" y="8" width="10" height="104" rx="0" fill="#3D7BA8" opacity="0.5"/>
+        <rect x="61" y="8" width="7" height="104" rx="0" fill="#4A8FBF" opacity="0.6"/>
+        <line x1="5" y1="8" x2="5" y2="112" stroke="#7BB8D8" stroke-width="0.5" opacity="0.4"/>
+        <line x1="15" y1="8" x2="15" y2="112" stroke="#162D4A" stroke-width="1"/>
+        <line x1="29" y1="8" x2="29" y2="112" stroke="#162D4A" stroke-width="1"/>
+        <line x1="43" y1="8" x2="43" y2="112" stroke="#162D4A" stroke-width="1"/>
+        <line x1="57" y1="8" x2="57" y2="112" stroke="#162D4A" stroke-width="1"/>
+        <line x1="68" y1="8" x2="68" y2="112" stroke="#162D4A" stroke-width="0.5"/>
+        <line x1="5" y1="30" x2="68" y2="30" stroke="#162D4A" stroke-width="0.5" opacity="0.5"/>
+        <line x1="5" y1="52" x2="68" y2="52" stroke="#162D4A" stroke-width="0.5" opacity="0.5"/>
+        <line x1="5" y1="74" x2="68" y2="74" stroke="#162D4A" stroke-width="0.5" opacity="0.5"/>
+        <line x1="5" y1="96" x2="68" y2="96" stroke="#162D4A" stroke-width="0.5" opacity="0.5"/>
+        <rect x="6" y="9" width="9" height="4" rx="0" fill="#FFE8A3" opacity="0.9"/>
+        <rect x="34" y="9" width="9" height="4" rx="0" fill="#FFE8A3" opacity="0.9"/>
+        <rect x="20" y="31" width="9" height="4" rx="0" fill="#FFE8A3" opacity="0.8"/>
+        <rect x="48" y="53" width="9" height="4" rx="0" fill="#FFE8A3" opacity="0.7"/>
+        <rect x="20" y="75" width="9" height="4" rx="0" fill="#FFE8A3" opacity="0.8"/>
+        <rect x="6" y="97" width="9" height="4" rx="0" fill="#FFE8A3" opacity="0.6"/>
+        <rect x="6" y="112" width="60" height="8" fill="#142640"/>
+      </svg>
+      <span class="bn">Glass Office</span>
+      <span class="bt">Corporate Tower</span>
+    </div>
+
+    <div class="bld">
+      <svg viewBox="0 0 72 120" width="72" height="120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="72" height="120" fill="#EDE5D3"/>
+        <rect x="0" y="0" width="72" height="5" fill="#C9A84C"/>
+        <rect x="0" y="5" width="72" height="3" fill="#EDE5D3"/>
+        <rect x="0" y="37" width="72" height="2" fill="#D4C5A0"/>
+        <rect x="0" y="71" width="72" height="2" fill="#D4C5A0"/>
+        <rect x="8" y="10" width="14" height="20" rx="1" fill="#B8D4E8" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="8" y="10" width="14" height="8" rx="7" fill="#EDE5D3" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="29" y="10" width="14" height="20" rx="1" fill="#FFE8A3" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="29" y="10" width="14" height="8" rx="7" fill="#EDE5D3" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="50" y="10" width="14" height="20" rx="1" fill="#B8D4E8" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="50" y="10" width="14" height="8" rx="7" fill="#EDE5D3" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="8" y="42" width="14" height="20" rx="1" fill="#FFE8A3" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="8" y="42" width="14" height="8" rx="7" fill="#EDE5D3" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="29" y="42" width="14" height="20" rx="1" fill="#B8D4E8" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="29" y="42" width="14" height="8" rx="7" fill="#EDE5D3" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="50" y="42" width="14" height="20" rx="1" fill="#FFE8A3" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="50" y="42" width="14" height="8" rx="7" fill="#EDE5D3" stroke="#8B6914" stroke-width="0.5"/>
+        <rect x="0" y="85" width="72" height="10" fill="#8B2500"/>
+        <rect x="0" y="93" width="72" height="4" fill="#6B1C00"/>
+        <rect x="0" y="97" width="72" height="23" fill="#EDE5D3"/>
+        <rect x="15" y="99" width="42" height="21" rx="1" fill="#B8D4E8" opacity="0.8"/>
+        <rect x="15" y="99" width="20" height="21" rx="0" fill="#B8D4E8" opacity="0.6"/>
+        <line x1="35" y1="99" x2="35" y2="120" stroke="#8B6914" stroke-width="0.5"/>
+        <circle cx="35" cy="110" r="1.5" fill="#C9A040"/>
+      </svg>
+      <span class="bn">Boutique Hotel</span>
+      <span class="bt">Historic Elegance</span>
+    </div>
+
+    <div class="bld">
+      <svg viewBox="0 0 72 120" width="72" height="120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="72" height="80" fill="#C26B54"/>
+        <rect x="0" y="0" width="72" height="80" fill="none" stroke="#B05A45" stroke-width="0.5"/>
+        <line x1="24" y1="0" x2="24" y2="80" stroke="#A84E3A" stroke-width="0.5" opacity="0.6"/>
+        <line x1="48" y1="0" x2="48" y2="80" stroke="#A84E3A" stroke-width="0.5" opacity="0.6"/>
+        <line x1="0" y1="16" x2="72" y2="16" stroke="#A84E3A" stroke-width="0.4" opacity="0.5"/>
+        <line x1="0" y1="32" x2="72" y2="32" stroke="#A84E3A" stroke-width="0.4" opacity="0.5"/>
+        <line x1="0" y1="48" x2="72" y2="48" stroke="#A84E3A" stroke-width="0.4" opacity="0.5"/>
+        <line x1="0" y1="64" x2="72" y2="64" stroke="#A84E3A" stroke-width="0.4" opacity="0.5"/>
+        <rect x="5" y="4" width="14" height="10" rx="1" fill="#7A9DB5" opacity="0.7"/>
+        <rect x="29" y="4" width="14" height="10" rx="1" fill="#FFE8A3" opacity="0.8"/>
+        <rect x="53" y="4" width="14" height="10" rx="1" fill="#7A9DB5" opacity="0.7"/>
+        <rect x="5" y="20" width="14" height="10" rx="1" fill="#FFE8A3" opacity="0.8"/>
+        <rect x="29" y="20" width="14" height="10" rx="1" fill="#7A9DB5" opacity="0.7"/>
+        <rect x="53" y="20" width="14" height="10" rx="1" fill="#FFE8A3" opacity="0.8"/>
+        <rect x="5" y="36" width="14" height="10" rx="1" fill="#7A9DB5" opacity="0.6"/>
+        <rect x="29" y="36" width="14" height="10" rx="1" fill="#FFE8A3" opacity="0.7"/>
+        <rect x="53" y="36" width="14" height="10" rx="1" fill="#7A9DB5" opacity="0.6"/>
+        <rect x="5" y="52" width="14" height="10" rx="1" fill="#FFE8A3" opacity="0.7"/>
+        <rect x="29" y="52" width="14" height="10" rx="1" fill="#7A9DB5" opacity="0.6"/>
+        <rect x="53" y="52" width="14" height="10" rx="1" fill="#FFE8A3" opacity="0.7"/>
+        <rect x="0" y="80" width="72" height="40" fill="#E8E0D0"/>
+        <rect x="4" y="83" width="64" height="34" rx="1" fill="#B8D4E8" opacity="0.7"/>
+        <line x1="36" y1="83" x2="36" y2="117" stroke="#9BA8B0" stroke-width="0.5"/>
+        <rect x="0" y="80" width="72" height="4" fill="#9B3820"/>
+        <rect x="4" y="111" width="30" height="1.5" fill="#9BA8B0" opacity="0.6"/>
+        <rect x="38" y="111" width="30" height="1.5" fill="#9BA8B0" opacity="0.6"/>
+      </svg>
+      <span class="bn">Mixed-Use</span>
+      <span class="bt">Retail + Apartments</span>
+    </div>
+
+    <div class="bld">
+      <svg viewBox="0 0 72 120" width="72" height="120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="72" height="120" fill="#8C8C8C"/>
+        <rect x="0" y="0" width="72" height="120" fill="none" stroke="#787878" stroke-width="0.5"/>
+        <rect x="0" y="0" width="72" height="6" fill="#767676"/>
+        <rect x="6" y="12" width="60" height="8" rx="0" fill="#4A4A4A"/>
+        <rect x="6" y="28" width="60" height="8" rx="0" fill="#4A4A4A"/>
+        <rect x="6" y="44" width="60" height="8" rx="0" fill="#4A4A4A"/>
+        <rect x="6" y="60" width="60" height="8" rx="0" fill="#4A4A4A"/>
+        <rect x="6" y="76" width="60" height="8" rx="0" fill="#4A4A4A"/>
+        <line x1="7" y1="12" x2="7" y2="20" stroke="#5A5A5A" stroke-width="0.5"/>
+        <line x1="65" y1="12" x2="65" y2="20" stroke="#9E9E9E" stroke-width="0.5" opacity="0.5"/>
+        <line x1="7" y1="44" x2="7" y2="52" stroke="#5A5A5A" stroke-width="0.5"/>
+        <line x1="65" y1="44" x2="65" y2="52" stroke="#9E9E9E" stroke-width="0.5" opacity="0.5"/>
+        <rect x="6" y="12" width="60" height="8" fill="none" stroke="#3A3A3A" stroke-width="0.3"/>
+        <rect x="6" y="28" width="60" height="8" fill="none" stroke="#3A3A3A" stroke-width="0.3"/>
+        <rect x="6" y="44" width="60" height="8" fill="none" stroke="#3A3A3A" stroke-width="0.3"/>
+        <rect x="6" y="60" width="60" height="8" fill="none" stroke="#3A3A3A" stroke-width="0.3"/>
+        <rect x="6" y="76" width="60" height="8" fill="none" stroke="#3A3A3A" stroke-width="0.3"/>
+        <rect x="0" y="94" width="72" height="26" fill="#787878"/>
+        <rect x="22" y="96" width="28" height="24" rx="1" fill="#3A3A3A"/>
+        <rect x="22" y="96" width="28" height="4" fill="#2A2A2A"/>
+      </svg>
+      <span class="bn">Brutalist</span>
+      <span class="bt">Concrete Monument</span>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--color-text-tertiary);margin:10px 0 0;">Each building type is drawn in real-time on Canvas with per-pixel window detail, façade texture, and architectural features. Block type is randomly assigned each turn, with rarer types (Penthouse, Heritage) appearing at higher floors.</p>
+</div>
+
+<hr class="d">
+
+<div class="sec">
+  <div class="shd">05 — Scoring & Combo System</div>
+  <div class="sub">Points, multipliers, and chain mechanics</div>
+  <div class="g2">
+    <div class="card">
+      <p style="font-size:13px;font-weight:500;margin:0 0 10px;">Placement Points</p>
+      <div class="srow">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge ok">PERFECT!</span>
+          <span style="font-size:12px;color:var(--color-text-secondary);">±12px tolerance</span>
+        </div>
+        <span style="font-weight:500;">+50 pts</span>
+      </div>
+      <div class="srow">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge ii">GREAT</span>
+          <span style="font-size:12px;color:var(--color-text-secondary);">±24px tolerance</span>
+        </div>
+        <span style="font-weight:500;">+25 pts</span>
+      </div>
+      <div class="srow">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge ww">GOOD</span>
+          <span style="font-size:12px;color:var(--color-text-secondary);">±40px tolerance</span>
+        </div>
+        <span style="font-weight:500;">+10 pts</span>
+      </div>
+      <div class="srow">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge dd">MISS</span>
+          <span style="font-size:12px;color:var(--color-text-secondary);">Block overhangs</span>
+        </div>
+        <span style="font-weight:500;color:var(--color-text-danger);">Trimmed</span>
+      </div>
+      <div class="srow">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge dd">FAIL</span>
+          <span style="font-size:12px;color:var(--color-text-secondary);">&lt;15% remains</span>
+        </div>
+        <span style="font-weight:500;color:var(--color-text-danger);">Game Over</span>
+      </div>
+    </div>
+    <div class="card">
+      <p style="font-size:13px;font-weight:500;margin:0 0 10px;">Combo Multiplier Chain</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="combo-pill"><i class="ti ti-bolt" style="font-size:13px;color:var(--color-text-warning)" aria-hidden="true"></i>2× Combo</span>
+          <span style="font-size:12px;color:var(--color-text-secondary);">2 Perfects in a row</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="combo-pill"><i class="ti ti-bolt" style="font-size:13px;color:var(--color-text-warning)" aria-hidden="true"></i>3× Combo</span>
+          <span style="font-size:12px;color:var(--color-text-secondary);">3 Perfects in a row</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="combo-pill"><i class="ti ti-bolt" style="font-size:13px;color:var(--color-text-warning)" aria-hidden="true"></i>5× Combo</span>
+          <span style="font-size:12px;color:var(--color-text-secondary);">5 Perfects in a row</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="combo-pill" style="border-color:var(--color-border-info);"><i class="ti ti-crown" style="font-size:13px;color:var(--color-text-info)" aria-hidden="true"></i>ARCHITECT MODE</span>
+          <span style="font-size:12px;color:var(--color-text-secondary);">10 Perfects → crowd erupts</span>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--color-text-tertiary);margin:10px 0 0;">Breaking the chain (any non-Perfect) resets the multiplier. "Architect Mode" adds confetti storm + slow-motion effect for next block.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="d">
+
+<div class="sec">
+  <div class="shd">06 — Progression & Milestones</div>
+  <div class="sub">Height districts, speed escalation, and achievement gates</div>
+  <div class="g2">
+    <div>
+      <div class="ml">
+        <div class="ml-f">Fl. 1–5<br><span style="color:var(--color-text-tertiary);font-weight:400;">Dawn</span></div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Ground District</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Tutorial speed. Block is slow and forgiving. Dawn sky. You're just a small developer on the block.</p>
+        </div>
+      </div>
+      <div class="ml">
+        <div class="ml-f">Fl. 6–15<br><span style="color:var(--color-text-tertiary);font-weight:400;">Morning</span></div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Downtown Core</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Speed increases by 10%. City noise ambience kicks in. Combo system unlocked. Sky turns bright blue.</p>
+        </div>
+      </div>
+      <div class="ml">
+        <div class="ml-f">Fl. 16–25<br><span style="color:var(--color-text-tertiary);font-weight:400;">Noon</span></div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Mid-Rise Zone</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Speed +20% total. Crowd cheering begins. Rare glass office towers and hotels appear. Camera pans further.</p>
+        </div>
+      </div>
+      <div class="ml">
+        <div class="ml-f">Fl. 26–40<br><span style="color:var(--color-text-tertiary);font-weight:400;">Golden</span></div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Skyline District</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Speed +35%. Golden hour sky. Building windows begin to light up. "Architect Mode" achievable. Rooftop helicopters.</p>
+        </div>
+      </div>
+      <div class="ml">
+        <div class="ml-f">Fl. 41–60<br><span style="color:var(--color-text-tertiary);font-weight:400;">Dusk</span></div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">High-Rise Zone</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Speed +50%. Purple dusk sky. Clouds start to appear at tower base. Crowd noise intensifies. Rare penthouse blocks.</p>
+        </div>
+      </div>
+      <div class="ml">
+        <div class="ml-f">Fl. 60+<br><span style="color:var(--color-text-tertiary);font-weight:400;">Night</span></div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Stratosphere</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Max speed. Full night sky, stars, city lights far below. Tower emerges above clouds. "LEGENDARY" leaderboard tier.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="align-self:start;">
+      <p style="font-size:13px;font-weight:500;margin:0 0 10px;">Difficulty Scaling</p>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Block speed</span><span>+10% per 10 floors</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Direction switch</span><span>Every floor (alternates)</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Speed variation</span><span>±5% random jitter above fl.20</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Max speed cap</span><span>Floor 60 (no further increase)</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">High score save</span><span>localStorage (top 5 saved)</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="d">
+
+<div class="sec">
+  <div class="shd">07 — Visual Effects & Game "Juice"</div>
+  <div class="sub">Feedback animations, particles, audio, and screen events</div>
+  <div class="g2">
+    <div>
+      <div class="fx-row">
+        <i class="ti ti-sparkles" aria-hidden="true"></i>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">PERFECT! Burst</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Gold + white particle burst from impact point. "PERFECT!" text bounces in, scales up, fades. Screen flashes briefly warm. Crowd cheer SFX. Duration: 0.6s.</p>
+        </div>
+      </div>
+      <div class="fx-row">
+        <i class="ti ti-confetti" aria-hidden="true"></i>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Combo Escalation</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">At 3× combo: multiplier badge pulses. At 5×: score counter shakes. At "Architect Mode": full confetti storm, slow-motion next block, triumphant sting.</p>
+        </div>
+      </div>
+      <div class="fx-row">
+        <i class="ti ti-ripple" aria-hidden="true"></i>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Block Trim Physics</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Cut-off excess piece rotates and falls with simulated gravity. Dust/debris particles on cut edge. Satisfying "slice" sound effect. Piece shatters when hitting distant ground.</p>
+        </div>
+      </div>
+      <div class="fx-row">
+        <i class="ti ti-camera-filled" aria-hidden="true"></i>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Camera Shake</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">On MISS: light screen shake (4px, 200ms). On large miss (>60% overhang): strong shake + red screen tint flash. Game Over: extended shake + dramatic SFX.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="fx-row">
+        <i class="ti ti-sun" aria-hidden="true"></i>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Environment Transitions</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Sky color smoothly interpolates between time-of-day palette stops. Background city layers shift speed. Window lights in background buildings gradually appear as night falls.</p>
+        </div>
+      </div>
+      <div class="fx-row">
+        <i class="ti ti-music" aria-hidden="true"></i>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Audio Design</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Web Audio API. Ambient city hum layers with height. Each block type has unique placement "thud." Perfect = chime. Great = click. Miss = creak. Crowd noise builds with combo.</p>
+        </div>
+      </div>
+      <div class="fx-row">
+        <i class="ti ti-maximize" aria-hidden="true"></i>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Screen Transitions</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Game Over: tower sways, slow-motion block falls, cinematic zoom out revealing full tower height. Score summary slides in. High score celebrated with ticker tape + trumpet fanfare.</p>
+        </div>
+      </div>
+      <div class="fx-row">
+        <i class="ti ti-eye" aria-hidden="true"></i>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 2px;">Accessibility</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">prefers-reduced-motion respects OS setting (animations disabled). High-contrast mode toggle. Touch + click + keyboard (Space) all trigger block drop.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="d">
+
+<div class="sec">
+  <div class="shd">08 — Technical Architecture</div>
+  <div class="sub">Stack, structure, and key implementation notes</div>
+  <div class="g2">
+    <div class="card">
+      <p style="font-size:13px;font-weight:500;margin:0 0 10px;">Core Tech Stack</p>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Language</span><span>Vanilla JavaScript (ES2022+)</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Rendering</span><span>HTML5 Canvas 2D API</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Game loop</span><span>requestAnimationFrame (60fps)</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Audio</span><span>Web Audio API (generated tones)</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Storage</span><span>localStorage (scores)</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Physics</span><span>Custom lightweight (no lib)</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Build tool</span><span>Vite (bundling + HMR)</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);">Hosting</span><span>Vercel / Netlify (static)</span></div>
+    </div>
+    <div class="card">
+      <p style="font-size:13px;font-weight:500;margin:0 0 10px;">System Modules</p>
+      <div class="srow"><span style="color:var(--color-text-secondary);"><code>GameLoop</code></span><span>RAF, delta time, pause/resume</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);"><code>BlockManager</code></span><span>Movement, spawn, detection</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);"><code>BuildingRenderer</code></span><span>Canvas draw per building type</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);"><code>Camera</code></span><span>Smooth pan, shake, zoom</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);"><code>ParticleSystem</code></span><span>Pool-based, reusable objects</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);"><code>ScoreManager</code></span><span>Combo chain, multipliers</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);"><code>SkyRenderer</code></span><span>Time-of-day sky + parallax</span></div>
+      <div class="srow"><span style="color:var(--color-text-secondary);"><code>AudioEngine</code></span><span>Procedural SFX + music</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="d">
+
+<div class="sec">
+  <div class="shd">09 — Development Roadmap</div>
+  <div class="sub">Ten-week phased build plan</div>
+  <div class="g2">
+    <div>
+      <div class="ph">
+        <div class="ph-lbl">Phase 1<br>Week 1–2</div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 4px;">Foundation</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Canvas setup, game loop, basic block movement (sine oscillation), click detection, collision math, trimming logic, score counter. Placeholder gray rectangles only.</p>
+        </div>
+      </div>
+      <div class="ph">
+        <div class="ph-lbl">Phase 2<br>Week 3–4</div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 4px;">Building Art</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">BuildingRenderer module. All 5 building types drawn in Canvas. Window grid system, façade details, lighting states. Retina / HiDPI pixel density handling.</p>
+        </div>
+      </div>
+      <div class="ph">
+        <div class="ph-lbl">Phase 3<br>Week 5–6</div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 4px;">Effects & Camera</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Particle system, camera shake, PERFECT! animation, trim physics, screen flash. Camera smooth pan, parallax city background, day-night sky progression.</p>
+        </div>
+      </div>
+      <div class="ph">
+        <div class="ph-lbl">Phase 4<br>Week 7–8</div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 4px;">Systems & Audio</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Combo chain multiplier, milestone triggers, difficulty scaling, Web Audio SFX (procedural), background ambient layers, Game Over cinematic sequence.</p>
+        </div>
+      </div>
+      <div class="ph">
+        <div class="ph-lbl">Phase 5<br>Week 9–10</div>
+        <div>
+          <p style="font-size:13px;font-weight:500;margin:0 0 4px;">Polish & Launch</p>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Mobile touch optimization, start screen, leaderboard UI, achievements, accessibility (reduced motion, keyboard), cross-browser QA, performance profiling, Vercel deploy.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px;">
+        <p style="font-size:13px;font-weight:500;margin:0 0 10px;">Success Metrics</p>
+        <div class="srow"><span style="color:var(--color-text-secondary);">Session target</span><span>3+ minutes avg.</span></div>
+        <div class="srow"><span style="color:var(--color-text-secondary);">FPS</span><span>60fps on mid-range mobile</span></div>
+        <div class="srow"><span style="color:var(--color-text-secondary);">Load time</span><span>&lt; 2 seconds (no assets)</span></div>
+        <div class="srow"><span style="color:var(--color-text-secondary);">Bundle size</span><span>&lt; 80kb gzipped</span></div>
+        <div class="srow"><span style="color:var(--color-text-secondary);">Replay rate</span><span>Target: &gt;70% play again</span></div>
+      </div>
+      <div class="card">
+        <p style="font-size:13px;font-weight:500;margin:0 0 10px;">Future Features (Post-Launch)</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="badge gg">Online leaderboard</span>
+          <span class="badge gg">Daily challenge</span>
+          <span class="badge gg">Power-ups</span>
+          <span class="badge gg">Building unlock gallery</span>
+          <span class="badge gg">Share screenshot</span>
+          <span class="badge gg">2-player race</span>
+          <span class="badge gg">Earthquake event</span>
+          <span class="badge gg">Night mode skin</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:1.5rem 0;border-top:0.5px solid var(--color-border-tertiary);margin-top:1rem;">
+  <p style="font-size:12px;color:var(--color-text-tertiary);margin:0;">SKYRISE Game Design Document · v1.0 · Ready to Build</p>
+</div>

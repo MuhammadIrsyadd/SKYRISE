@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>SKYRISE — Build Your Legacy</title>
+    <!-- Tabler Icons for UI -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="gameCanvas"></canvas>
+      
+      <!-- UI Overlay -->
+      <div id="ui-layer">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+          <div class="header">
+            <i class="ti ti-building-skyscraper main-icon"></i>
+            <h1>SKYRISE</h1>
+            <p>"Build Your Legacy, One Floor at a Time"</p>
+          </div>
+          <div class="stats-preview">
+            <div class="stat">
+              <span class="label">BEST</span>
+              <span id="best-score">0</span>
+            </div>
+          </div>
+          <button id="start-button">START BUILDING</button>
+        </div>
+
+        <!-- Hud -->
+        <div id="hud" class="hidden">
+          <div class="score-container">
+            <div id="score">0</div>
+            <div id="combo-badge" class="hidden">2x COMBO</div>
+          </div>
+          <div class="height-info">
+            <span id="floor-count">FLOOR 1</span>
+          </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="screen hidden">
+          <h2>TOWER COLLAPSED!</h2>
+          <div class="final-stats">
+            <div class="stat">
+              <span class="label">HEIGHT</span>
+              <span id="final-floor">0 FLOORS</span>
+            </div>
+            <div class="stat">
+              <span class="label">SCORE</span>
+              <span id="final-score">0</span>
+            </div>
+          </div>
+          <div id="new-high-score" class="hidden">NEW HIGH SCORE!</div>
+          <button id="restart-button">REBUILD</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
